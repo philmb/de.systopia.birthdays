@@ -26,7 +26,7 @@ class CRM_Birthdays_Form_Report_Birthdays extends CRM_Report_Form {
 
   protected $_summary = NULL;
 
-  protected $_customGroupExtends = NULL;
+  protected $_customGroupExtends = array( 'Contact' );
 
   protected $_customGroupGroupBy = FALSE;
 
