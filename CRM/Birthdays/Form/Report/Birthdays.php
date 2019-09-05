@@ -214,9 +214,10 @@ class CRM_Birthdays_Form_Report_Birthdays extends CRM_Report_Form {
     // only contacts with birthdays
     $clauses[] = "({$this->_aliases['civicrm_contact']}.birth_date IS NOT NULL)";
 
-    // no deleted contacts (see https://github.com/systopia/de.systopia.birthdays/issues/10)
+    // no deleted or deceased contacts (see https://github.com/systopia/de.systopia.birthdays/issues/10)
     $clauses[] = "(({$this->_aliases['civicrm_contact']}.is_deleted IS NULL) OR ({$this->_aliases['civicrm_contact']}.is_deleted = 0))";
-
+	$clauses[] = "({$this->_aliases['civicrm_contact']}.is_deceased != 1)";
+	
     $this->_where = "WHERE " . implode(' AND ', $clauses);
 
     if ($this->_aclWhere) {
